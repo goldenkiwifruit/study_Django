@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p>著者名: {{ book.author }}</p>
+    <p>出版日: {{ book.publication_date }}</p>
+    <P>表紙画像:
+    {% if book.cover_image %}
+        <img src="{{ book.cover_image.url }}"
+            alt="{{ book.title }}" class="book-cover">
+    {% else %}
+        未設定
+    {% endif %}
+    </P>
+    <a href="{% url 'book_list' %}">戻る</a>
+</body>
+</html>

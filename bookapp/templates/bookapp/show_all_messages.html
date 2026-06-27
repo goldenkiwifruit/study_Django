@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>メッセージの表示</title>
+    <style>
+        .messages {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .messages li {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 3px;
+        }
+
+        .debug {
+            background-color: lightgray;
+        }
+
+        .info {
+            background-color: lightblue;
+        }
+
+        .success{
+            background-color: lightgreen;
+        }
+
+        .warning {
+            background-color: yellow;
+        }
+
+        .error {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<head>
+    <h1>メッセージの表示</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for messages in messages %}
+                <li class="{{ messages.tags }}">{{ messages }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</head>
+</html>
