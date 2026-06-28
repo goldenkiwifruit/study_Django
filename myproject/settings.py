@@ -131,3 +131,8 @@ MESSAGE_LEVEL = message_constants.DEBUG
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = 'menu/'
+
+LOGOUT_REDIRECT_URL = '/'

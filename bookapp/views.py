@@ -4,6 +4,7 @@ from .forms import BookForm
 from django.contrib import messages
 import os
 from django.conf import settings
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 def add_messages(request):
@@ -17,17 +18,20 @@ def add_messages(request):
 def show_display_messages(request):
     return render(request, 'bookapp/show_all_messages.html')
 
-
+@login_required
 def book_list(request):
     books = Book.objects.all()
 
     return render(request, 'bookapp/book_list.html', {'book_list': books})
 
+@login_required
 def book_detail(request, pk):
     target = get_object_or_404(Book, pk=pk)
 
     return render(request, 'bookapp/book_detail.html', {'book':target})
 
+@login_required
+@permission_required('bookapp.add_book', raise_exception=True)
 def book_create(request):
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
@@ -40,6 +44,8 @@ def book_create(request):
     
     return render(request, 'bookapp/book_form.html', {'form': form, 'title': '書籍登録'})
 
+@login_required
+@permission_required('bookapp.change_book', raise_exception=True)
 def book_update(request, pk):
     target = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
@@ -55,6 +61,8 @@ def book_update(request, pk):
     
     return render(request, 'bookapp/book_form.html',{'form': form, 'title':'書籍編集'})
 
+@login_required
+@permission_required('bookapp.delete_book', raise_exception=True)
 def book_delete(request, pk):
     target = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
