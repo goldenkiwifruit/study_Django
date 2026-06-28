@@ -29,4 +29,5 @@ urlpatterns = [
     path('exe03/', include('todoapp.urls')),
     path('', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('exe04/', include('educationapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
